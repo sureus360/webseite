@@ -246,18 +246,6 @@ const dateFormatter = new Intl.DateTimeFormat("de-DE", {
   year: "numeric",
 });
 
-const baseSlots = ["09:00", "10:30", "14:00", "16:30"];
-const fixedBusy = new Set([
-  "2026-06-04|16:30",
-  "2026-06-06|10:30",
-  "2026-06-11|16:30",
-  "2026-06-13|10:30",
-  "2026-06-18|16:30",
-  "2026-06-20|14:00",
-  "2026-07-12|10:30",
-  "2026-09-13|10:30",
-]);
-
 const storedBusy = new Set(JSON.parse(localStorage.getItem("pferdeerlebnis-busy") || "[]"));
 let cursor = new Date(2026, 5, 1);
 let selectedDate = null;
@@ -335,21 +323,22 @@ function isoDate(date) {
 
 function slotsForDate(date) {
   const day = date.getDay();
-  if (day === 0) return [];
-  if (day === 4) return ["16:30", "17:15"];
-  if (day === 5) return ["09:00", "10:30"];
-  if (day === 6) return ["10:00", "12:00"];
-  return baseSlots;
+  if (day === 1) return ["16:30"];
+  if (day === 2) return ["16:30", "17:30"];
+  if (day === 3) return ["16:30", "17:00"];
+  if (day === 4) return ["16:30–18:00 Kinderreitgruppe"];
+  if (day === 5) return ["15:30", "16:30", "17:30"];
+  return [];
 }
 
-function isBusy(dateKey, slot) {
-  const key = `${dateKey}|${slot}`;
-  return fixedBusy.has(key) || storedBusy.has(key);
+function isBusy(date, slot) {
+  const key = `${isoDate(date)}|${slot}`;
+  const day = date.getDay();
+  return day === 3 || day === 4 || storedBusy.has(key);
 }
 
 function hasFreeSlot(date) {
-  const dateKey = isoDate(date);
-  return slotsForDate(date).some((slot) => !isBusy(dateKey, slot));
+  return slotsForDate(date).some((slot) => !isBusy(date, slot));
 }
 
 function renderCalendar() {
@@ -402,7 +391,7 @@ function renderSlots(date) {
   }
 
   slots.forEach((slot) => {
-    const busy = isBusy(dateKey, slot);
+    const busy = isBusy(date, slot);
     const button = document.createElement("button");
     button.type = "button";
     button.className = "slot-button";
