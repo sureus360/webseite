@@ -466,6 +466,19 @@ section h2,
   color: var(--sage-900);
 }
 
+.offer-menu-list {
+  display: grid;
+  gap: 8px;
+  margin: -4px 0 20px;
+  padding: 14px 18px 14px 38px;
+  border-radius: 8px;
+  background: var(--mist);
+  color: var(--sage-900);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .offer-facts {
   display: grid;
   gap: 12px;

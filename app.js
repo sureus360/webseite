@@ -157,35 +157,67 @@ const offers = {
   erlebnisreitkurs: {
     title: "Erlebnisreitkurs",
     time: "Samstag, 10:00 bis 14:00 Uhr",
-    price: "55 EURO",
+    price: "55,00 EURO",
     content: `
-      <h4>Info zum Kursinhalt</h4>
+      <h4>Kursanmeldung: Ein Tag rund ums Pferd</h4>
       <p>
-        Sie bringen Ihre Kinder um 10:00 Uhr zu mir und dürfen Ihr Kind nach
-        einer kurzen Begrüßungsrunde bei mir lassen.
+        Herzlich willkommen! Ich freue mich darauf, Ihrem Kind einen
+        unvergesslichen Tag mit unseren Pferden Balu und Nele zu ermöglichen.
       </p>
+
+      <h4>Kosten &amp; Zahlung</h4>
       <p>
-        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
-        mitgebracht werden. Bei warmem Wetter bitte keine kurze Kleidung wie
-        kurze Hosen oder Röcke, am besten eine Leggings. Bitte nur feste,
-        geschlossene Schuhe und keine Sandalen.
+        Die Teilnahmegebühr für diesen Tag beträgt 55,00 €. Bitte überweisen
+        Sie den Betrag unter Angabe des Namens Ihres Kindes sowie des Kursnamens
+        auf folgendes Konto:
       </p>
+      <p class="offer-highlight">
+        <strong>Kontoinhaberin:</strong> Sabrina Riese<br />
+        <strong>IBAN:</strong> DE77 4036 1906 4320 4425 00<br />
+        <strong>Bank:</strong> Volksbank Münsterland Nord
+      </p>
+
+      <h4>Das erwartet Ihr Kind – Unsere Highlights</h4>
       <p>
-        Die Kinder bekommen in unseren gemeinsamen Pausen Wasser und
-        Apfelschorle angeboten. Gegen 12:30 Uhr werden wir Mittag essen:
-        Pommes und Hähnchen-Dinos mit Tomatenketchup und Mayonnaise. Kleine
-        Leckereien stehen natürlich auch bereit!
+        Wir verbringen einen erlebnisreichen Tag in der Natur, bei dem der
+        respektvolle Umgang mit den Pferden im Mittelpunkt steht:
       </p>
-      <h4>Ablauf</h4>
-      <ul class="offer-schedule">
-        <li><strong>10:15 Uhr:</strong> Goldene Regeln besprechen – Verhalten im Umgang mit den Pferden</li>
-        <li><strong>10:30 Uhr:</strong> Begrüßung der Pferde Balu und Nele, anschließend Pferdepflege</li>
-        <li><strong>11:00 Uhr:</strong> Reitplatz, Auslosung der Reihenfolge und Gruppenspiele auf dem Pferd</li>
-        <li><strong>12:15 Uhr:</strong> Pferde zurück in den Stall bringen</li>
-        <li><strong>12:30 Uhr:</strong> Mittagessen</li>
-        <li><strong>13:00 Uhr:</strong> Kreatives Angebot und Schatzsuche</li>
-        <li><strong>14:00 Uhr:</strong> Abholzeit und Urkundenvergabe</li>
+      <ul class="offer-facts">
+        <li><strong>Pferdeabenteuer:</strong> Kennenlernen von Balu und Nele, Pferdepflege und Reitspiele auf dem Platz.</li>
+        <li><strong>Spannende Schatzsuche:</strong> Ein aufregendes Highlight, das für Spaß und Action sorgt.</li>
+        <li><strong>Kreativzeit:</strong> Ein schönes Bastelangebot am Nachmittag.</li>
+        <li><strong>All-inclusive Verpflegung:</strong> Getränke wie Wasser und Apfelschorle sowie kleine Snacks sind inbegriffen. Für unser gemeinsames Mittagessen kündige ich vorab eine Speisekarte an, aus der wir wählen können.</li>
       </ul>
+      <ul class="offer-menu-list">
+        <li>Spaghetti mit Pesto oder Tomatensoße</li>
+        <li>Hähnchen-Dinos mit Pommes, Ketchup und Mayonnaise</li>
+      </ul>
+
+      <h4>Ablaufplan</h4>
+      <ul class="offer-schedule">
+        <li><strong>10:00 Uhr:</strong> Ankunft &amp; Begrüßung</li>
+        <li><strong>10:15 Uhr:</strong> Besprechung der goldenen Regeln im Umgang mit den Pferden</li>
+        <li><strong>10:30 Uhr:</strong> Pferdepflege mit Balu und Nele</li>
+        <li><strong>11:00 Uhr:</strong> Reitzeit auf dem Platz mit Spielen und Übungen an der Longe</li>
+        <li><strong>12:15 Uhr:</strong> Versorgen der Pferde</li>
+        <li><strong>12:30 Uhr:</strong> Gemeinsames Mittagessen</li>
+        <li><strong>13:00 Uhr:</strong> Kreatives Angebot und Basteln</li>
+        <li><strong>14:00 Uhr:</strong> Abholung durch die Eltern</li>
+      </ul>
+
+      <h4>Wichtige Vorbereitung</h4>
+      <p>
+        Damit wir sicher und wetterfest ausgestattet sind, bitte ich um
+        folgende Ausrüstung:
+      </p>
+      <ul class="offer-facts">
+        <li><strong>Kleidung:</strong> Bitte wetterfeste Kleidung tragen. Auch bei warmem Wetter bitte lange Hosen, zum Beispiel Leggings. Keine kurzen Hosen oder Röcke.</li>
+        <li><strong>Schuhwerk:</strong> Bitte ausschließlich feste, geschlossene Schuhe. Keine Sandalen.</li>
+        <li><strong>Sicherheit:</strong> Ein Fahrrad- oder Reithelm ist zwingend mitzubringen.</li>
+      </ul>
+
+      <p><strong>Ich freue mich auf einen tollen Tag mit den Kindern!</strong></p>
+      <p>Viele Grüße<br /><strong>Sabrina Riese</strong></p>
     `,
   },
 };
