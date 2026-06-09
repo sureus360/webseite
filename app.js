@@ -24,42 +24,65 @@ const offers = {
   kinderreitgruppe: {
     title: "Kinderreitgruppe",
     time: "Donnerstag, 16:30 bis 18:00 Uhr",
-    price: "57 EURO",
+    price: "57,00 EURO monatlich",
     content: `
-      <h4>Info Kinderreitgruppe</h4>
+      <h4>Informationen zur Kinderreitgruppe</h4>
       <p>
-        Sie bringen Ihre Kinder um 16:30 Uhr zu mir und dürfen Ihre Kinder nach
-        einer kurzen Begrüßungsrunde bei mir lassen.
+        Herzlich willkommen in unserer Kinderreitgruppe! Ich freue mich sehr
+        darauf, gemeinsam mit den Kindern eine erlebnisreiche und lehrreiche
+        Zeit mit den Pferden zu verbringen. Damit Sie bestmöglich informiert
+        sind, habe ich die wichtigsten Details hier für Sie zusammengefasst:
+      </p>
+
+      <h4>Ablauf und Inhalte</h4>
+      <p>
+        Jede Reitstunde ist individuell gestaltet, wobei der Spaß und die
+        Freude am Umgang mit den Tieren an erster Stelle stehen.
+      </p>
+      <ul class="offer-facts">
+        <li><strong>Ablauf:</strong> Wir beginnen um 16:30 Uhr mit einer Begrüßungsrunde. Danach bestimmen wir per Würfel oder Los die Reiterreihenfolge. Anschließend putzen wir gemeinsam die Pferde, wobei sich jedes Kind seine eigenen Utensilien wie Bürste und Striegel aussuchen darf.</li>
+        <li><strong>Programm:</strong> Wir gehen auf den Reitplatz und starten mit einem Aufwärmspiel. In den ersten Stunden vermittle ich den Kindern wichtige Grundregeln im Umgang mit dem Pferd.</li>
+        <li><strong>Wünsche:</strong> Die Kinder sind herzlich eingeladen, eigene Wünsche und Ideen zu äußern, was sie gerne mit den Pferden erleben möchten.</li>
+        <li><strong>Besonderheiten:</strong> Im Winter nutzen wir bei Kälte unser gemütliches Reiterstübchen für theoretische Einheiten bei einer Tasse Kakao. An sehr heißen Tagen sorgen wir für Abkühlung, waschen die Pferde und genießen gemeinsam ein Eis.</li>
+        <li><strong>Hinweis:</strong> An Feiertagen und während der Urlaubszeiten findet kein Reiten statt.</li>
+      </ul>
+
+      <h4>Kleidung und Ausrüstung</h4>
+      <p>
+        Für die Sicherheit und den Komfort Ihres Kindes ist die richtige
+        Kleidung essenziell:
+      </p>
+      <ul class="offer-facts">
+        <li><strong>Pflicht:</strong> Ein Fahrrad- oder Reithelm muss mitgebracht werden. Leihhelme sind bei Bedarf für eine Gebühr von 5 € erhältlich.</li>
+        <li><strong>Kleidung:</strong> Bitte achten Sie auf wetterfeste Kleidung. Bitte vermeiden Sie kurze Hosen oder Röcke; ideal ist eine eng anliegende Hose.</li>
+        <li><strong>Schuhwerk:</strong> Es sind ausschließlich feste, geschlossene Schuhe erlaubt. Keine Sandalen.</li>
+      </ul>
+
+      <h4>Organisatorisches und Zahlung</h4>
+      <p><strong>Monatlicher Beitrag:</strong> 57,00 €.</p>
+      <p>
+        <strong>Zahlungshinweise:</strong> Bitte überweisen Sie den Betrag
+        jeweils zum Monatsanfang auf folgendes Konto:
+      </p>
+      <p class="offer-highlight">
+        <strong>Kontoinhaber:</strong> Sabrina Riese<br />
+        <strong>IBAN:</strong> DE77 4036 1906 4320 4425 00<br />
+        <strong>Institut:</strong> Volksbank Münsterland Nord
       </p>
       <p>
-        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
-        mitgebracht werden. Falls der Helm vergessen wird, stelle ich für
-        5 EUR einen Leihhelm zur Verfügung. Bei warmem Wetter bitte keine kurze
-        Kleidung wie kurze Hosen oder Röcke, am besten eine eng sitzende Hose.
-        Bitte nur feste, geschlossene Schuhe und keine Sandalen.
+        <strong>Verwendungszweck:</strong> Bitte geben Sie den Namen des Kindes
+        und „Kinderreitgruppe“ an.
       </p>
-      <h4>Inhalt</h4>
+      <ul class="offer-facts">
+        <li><strong>Datenschutz:</strong> Ich werde Ihnen vorab eine Datenschutzerklärung zusenden. Bitte bringen Sie diese ausgefüllt zum ersten Kurstag mit. Bei Geschwisterkindern ist ein Formular ausreichend.</li>
+        <li><strong>Kündigung:</strong> Der Vertrag ist mit einer Frist von einem Monat zum Monatsende schriftlich kündbar, nach einer Laufzeit von vier Wochen.</li>
+      </ul>
+
       <p>
-        Wir werden in jeder Gruppenstunde per Würfel oder Los die
-        Reiter-Reihenfolge bestimmen. Danach wird gemeinsam geputzt. Jedes Kind
-        darf sich eine Bürste oder einen Striegel aussuchen. Wenn das Pferd
-        geputzt ist, gehen wir auf den Reitplatz.
+        <strong>Ich freue mich auf eine tolle Zeit mit Ihrem Kind! Bei weiteren
+        Fragen stehe ich Ihnen gerne zur Verfügung.</strong>
       </p>
-      <p>
-        Wir spielen gemeinsam ein Aufwärmspiel. Ein Kind ist dabei der Reiter,
-        die anderen befinden sich im Kreis um das Pferd herum. In den ersten
-        Stunden üben wir einige Grundregeln. Die Kinder sollen Spaß haben und
-        können Wünsche äußern, was sie gerne auf oder mit einem Pferd machen
-        möchten. Jede Stunde ist individuell.
-      </p>
-      <p>
-        In den Wintermonaten halten wir uns auch einmal im Reiterstübchen auf.
-        Wenn uns kalt wird, wärmen wir uns bei Kakao wieder auf und lernen etwas
-        Theoretisches über Pferde. An sehr heißen Tagen spritzen wir die Pferde
-        mit dem Wasserschlauch nass und waschen sie. Damit uns nicht zu heiß
-        wird, gibt es auch einmal ein Eis.
-      </p>
-      <p><strong>Viele Grüße und bis bald!</strong></p>
+      <p>Viele Grüße<br /><strong>Sabrina Riese</strong></p>
     `,
   },
   kinderreitkurs: {
