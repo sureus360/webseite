@@ -18,8 +18,20 @@ const offers = {
     title: "Reittherapie",
     time: "30 oder 60 Min.",
     price: "30 EUR / 55 EUR",
-    description:
-      "Eine ruhige Einheit mit dem Pferd, in der Beziehung, Vertrauen, Koordination und Selbstwirksamkeit gefördert werden. Die Pferdepflege ist in der gebuchten Zeit enthalten.",
+    content: `
+      <h4>Warum Reittherapie? – Der ganzheitliche Ansatz</h4>
+      <p>
+        Die Reittherapie, auch pferdegestützte Intervention genannt, wirkt,
+        weil sie den Klienten aus dem rein kognitiven Lernsetting herausholt
+        und eine ganzheitliche Erfahrung ermöglicht.
+      </p>
+      <ul class="offer-facts">
+        <li><strong>Der „Co-Therapeut“ Pferd:</strong> Pferde sind Fluchttiere und hochsensible Beobachter. Sie spiegeln Emotionen und körpersprachliche Signale des Menschen direkt und vorurteilsfrei wider. Dies fördert die Empathiefähigkeit und die Selbstreflexion.</li>
+        <li><strong>Physiologische Wirkung:</strong> Die dreidimensionale Schwingungsübertragung des Pferderückens im Schritt überträgt sich auf das Becken des Reiters. Dies stimuliert die Rumpfmuskulatur, verbessert die Haltung und wirkt gleichzeitig regulierend auf das Nervensystem.</li>
+        <li><strong>Selbstwirksamkeit:</strong> Das Führen und Reiten eines so großen Tieres vermittelt dem Klienten ein Gefühl von Stärke und Kontrolle, das direkt in den Alltag übertragen werden kann.</li>
+        <li><strong>Sensorik:</strong> Der Kontakt zum Tier mit Wärme, Geruch und taktilen Reizen wirkt beruhigend und ist ideal für die sensorische Integration bei Entwicklungsverzögerungen oder psychischen Belastungen.</li>
+      </ul>
+    `,
   },
   kinderreitgruppe: {
     title: "Kinderreitgruppe",
