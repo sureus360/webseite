@@ -466,6 +466,28 @@ section h2,
   color: var(--sage-900);
 }
 
+.offer-facts {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.offer-facts strong {
+  color: var(--sage-900);
+}
+
+.offer-content .offer-highlight {
+  padding: 16px 18px;
+  border-left: 5px solid var(--sage-700);
+  border-radius: 8px;
+  background: var(--mist);
+  color: var(--sage-900);
+}
+
 .offer-meta {
   display: flex;
   flex-wrap: wrap;

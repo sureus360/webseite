@@ -65,44 +65,70 @@ const offers = {
   kinderreitkurs: {
     title: "Kinderreitkurs",
     time: "16:30 bis 18:00 Uhr",
-    price: "Preis auf Anfrage",
+    price: "90,00 EURO",
     content: `
-      <h4>Info Kinderreitkurs</h4>
+      <h4>Informationen zum Kinderreitkurs</h4>
       <p>
-        Sie bringen Ihr Kind um 16:30 Uhr zu mir in die Marienstraße 17,
-        49479 Ibbenbüren. Sie dürfen Ihr Kind nach der Begrüßungsrunde bei mir
-        lassen und um 18:00 Uhr wieder abholen. Am ersten Tag tragen Sie noch
-        Ihre Erreichbarkeit während der Kurszeit in die Telefonliste ein oder
-        kontrollieren die vorhandene Telefonnummer.
+        Herzlich willkommen zum Reitkurs! Damit sich Ihr Kind bei uns sicher
+        und wohl fühlt, finden Sie hier alle wichtigen Details zu unserem
+        Ablauf und den Vorbereitungen.
+      </p>
+
+      <h4>Anmeldung &amp; Bezahlung</h4>
+      <p>
+        Die Kursgebühr beträgt 90,00 €. Bitte überweisen Sie diesen Betrag vor
+        Kursbeginn auf das angegebene Konto:
+      </p>
+      <p class="offer-highlight">
+        <strong>Sabrina Riese</strong><br />
+        DE77 4036 1906 4320 4425 00<br />
+        Volksbank Münsterland Nord
       </p>
       <p>
-        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
-        mitgebracht werden. Falls der Helm vergessen wird, stelle ich für
-        5 EUR einen Leihhelm zur Verfügung. Bei warmem Wetter bitte keine kurze
-        Kleidung wie kurze Hosen oder Röcke, am besten eine eng sitzende Hose.
-        Bitte nur feste, geschlossene Schuhe und keine Sandalen.
+        <strong>Verwendungszweck:</strong> Bitte geben Sie unbedingt den Namen
+        des Kindes sowie die Kursbezeichnung an, damit wir die Zahlung korrekt
+        zuordnen können.
       </p>
-      <h4>Inhalt</h4>
+
+      <h4>Organisatorisches</h4>
+      <ul class="offer-facts">
+        <li><strong>Treffpunkt:</strong> Marienstraße 17, 49479 Ibbenbüren</li>
+        <li><strong>Kurszeiten:</strong> Wir treffen uns pünktlich um 16:30 Uhr. Die Abholzeit ist um 18:00 Uhr.</li>
+        <li><strong>Ablauf:</strong> Nach der gemeinsamen Begrüßungsrunde können Sie Ihr Kind gerne in meine Obhut übergeben.</li>
+        <li><strong>Erreichbarkeit:</strong> Am ersten Kurstag bitte ich Sie, Ihre aktuelle Telefonnummer in der ausliegenden Liste zu hinterlegen beziehungsweise die vorhandenen Daten zu überprüfen.</li>
+        <li><strong>Verpflegung:</strong> Bitte geben Sie Ihrem Kind ausreichend Getränke mit.</li>
+      </ul>
+
+      <h4>Ausrüstung &amp; Kleidung</h4>
       <p>
-        Wir werden in jeder Gruppenstunde per Würfel oder Los die
-        Reiter-Reihenfolge bestimmen. Danach wird gemeinsam geputzt. Jedes Kind
-        darf sich eine Bürste oder einen Striegel aussuchen. Wenn das Pferd
-        geputzt ist, gehen wir auf den Reitplatz.
+        Sicherheit und Komfort haben für uns oberste Priorität. Bitte achten Sie
+        auf folgende Ausstattung:
       </p>
+      <ul class="offer-facts">
+        <li><strong>Helm:</strong> Ein Fahrrad- oder Reithelm ist Pflicht. Sollte dieser vergessen werden, stelle ich gerne gegen eine Gebühr von 5 € einen Leihhelm zur Verfügung.</li>
+        <li><strong>Kleidung:</strong> Bitte kleiden Sie Ihr Kind dem Wetter entsprechend. Auch bei warmen Temperaturen sind lange, eng anliegende Hosen erforderlich, um Scheuerstellen beim Reiten zu vermeiden. Keine kurzen Hosen oder Röcke.</li>
+        <li><strong>Schuhwerk:</strong> Festes, geschlossenes Schuhwerk ist zwingend notwendig. Keine Sandalen.</li>
+      </ul>
+
+      <h4>Kursinhalte &amp; Philosophie</h4>
       <p>
-        Wir spielen gemeinsam ein Aufwärmspiel. Ein Kind ist dabei der Reiter,
-        die anderen befinden sich im Kreis um das Pferd herum. In den ersten
-        Stunden üben wir einige Grundregeln. Die Kinder sollen Spaß haben und
-        können Wünsche äußern, was sie gerne auf oder mit einem Pferd machen
-        möchten. Jede Stunde ist individuell.
+        Unser Ziel ist es, den Kindern einen liebevollen und sicheren Umgang
+        mit den Pferden zu vermitteln. Jede Stunde gestalten wir individuell:
       </p>
-      <p>
-        Bei schlechtem Wetter halten wir uns auch einmal im Reiterstübchen auf
-        und lernen etwas Theoretisches über Pferde. An sehr heißen Tagen
-        spritzen wir die Pferde mit dem Wasserschlauch nass und waschen sie.
-        Getränke sollten mitgebracht werden.
-      </p>
-      <p><strong>Ich freue mich, Euch kennenzulernen!</strong></p>
+      <ul class="offer-facts">
+        <li><strong>Vorbereitung:</strong> Wir starten gemeinsam mit dem Putzen der Pferde. Dabei lernt jedes Kind den Umgang mit Striegel und Bürste.</li>
+        <li><strong>Ablauf:</strong> Die Reiterreihenfolge wird spielerisch per Los oder Würfel festgelegt. Auf dem Reitplatz beginnen wir mit einem Aufwärmspiel, bei dem die Kinder aktiv in den Ablauf eingebunden werden.</li>
+        <li><strong>Lernziele:</strong> In den ersten Stunden legen wir den Fokus auf grundlegende Sicherheits- und Verhaltensregeln.</li>
+        <li><strong>Individuelle Gestaltung:</strong> Die Wünsche der Kinder stehen im Vordergrund. Wir gehen offen auf Vorschläge ein, was sie gerne mit oder auf dem Pferd erleben möchten.</li>
+      </ul>
+
+      <h4>Besondere Bedingungen</h4>
+      <ul class="offer-facts">
+        <li><strong>Schlechtwetter:</strong> Bei widrigen Bedingungen nutzen wir unser Reiterstübchen für theoretische Einheiten rund um das Thema Pferd.</li>
+        <li><strong>Sommertage:</strong> Bei großer Hitze steht das Wohl der Tiere im Vordergrund. Wir genießen eine Abkühlung beim Abspritzen und Waschen der Pferde.</li>
+      </ul>
+
+      <p><strong>Ich freue mich auf eine tolle, lehrreiche und spaßige Zeit mit Ihrem Kind!</strong></p>
     `,
   },
   erlebnisreitkurs: {
