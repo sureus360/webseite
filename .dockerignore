@@ -1,0 +1,5 @@
+source_assets
+assets/Pictures
+*.pdf
+.git
+.DS_Store

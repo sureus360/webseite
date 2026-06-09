@@ -1,0 +1,368 @@
+const monthLabel = document.querySelector("#monthLabel");
+const calendarGrid = document.querySelector("#calendarGrid");
+const selectedDateLabel = document.querySelector("#selectedDateLabel");
+const slotList = document.querySelector("#slotList");
+const bookingForm = document.querySelector("#bookingForm");
+const formNote = document.querySelector("#formNote");
+const prevMonth = document.querySelector("#prevMonth");
+const nextMonth = document.querySelector("#nextMonth");
+const offerDetail = document.querySelector("#offerDetail");
+const offerTabs = document.querySelectorAll(".offer-tab");
+const photoLightbox = document.querySelector("#photoLightbox");
+const photoLightboxImage = document.querySelector("#photoLightboxImage");
+const photoLightboxClose = document.querySelector("#photoLightboxClose");
+const photoThumbs = document.querySelectorAll(".photo-thumb");
+
+const offers = {
+  reittherapie: {
+    title: "Reittherapie",
+    time: "30 oder 60 Min.",
+    price: "30 EUR / 55 EUR",
+    description:
+      "Eine ruhige Einheit mit dem Pferd, in der Beziehung, Vertrauen, Koordination und Selbstwirksamkeit gefördert werden. Die Pferdepflege ist in der gebuchten Zeit enthalten.",
+  },
+  kinderreitgruppe: {
+    title: "Kinderreitgruppe",
+    time: "Donnerstag, 16:30 bis 18:00 Uhr",
+    price: "57 EURO",
+    content: `
+      <h4>Info Kinderreitgruppe</h4>
+      <p>
+        Sie bringen Ihre Kinder um 16:30 Uhr zu mir und dürfen Ihre Kinder nach
+        einer kurzen Begrüßungsrunde bei mir lassen.
+      </p>
+      <p>
+        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
+        mitgebracht werden. Falls der Helm vergessen wird, stelle ich für
+        5 EUR einen Leihhelm zur Verfügung. Bei warmem Wetter bitte keine kurze
+        Kleidung wie kurze Hosen oder Röcke, am besten eine eng sitzende Hose.
+        Bitte nur feste, geschlossene Schuhe und keine Sandalen.
+      </p>
+      <h4>Inhalt</h4>
+      <p>
+        Wir werden in jeder Gruppenstunde per Würfel oder Los die
+        Reiter-Reihenfolge bestimmen. Danach wird gemeinsam geputzt. Jedes Kind
+        darf sich eine Bürste oder einen Striegel aussuchen. Wenn das Pferd
+        geputzt ist, gehen wir auf den Reitplatz.
+      </p>
+      <p>
+        Wir spielen gemeinsam ein Aufwärmspiel. Ein Kind ist dabei der Reiter,
+        die anderen befinden sich im Kreis um das Pferd herum. In den ersten
+        Stunden üben wir einige Grundregeln. Die Kinder sollen Spaß haben und
+        können Wünsche äußern, was sie gerne auf oder mit einem Pferd machen
+        möchten. Jede Stunde ist individuell.
+      </p>
+      <p>
+        In den Wintermonaten halten wir uns auch einmal im Reiterstübchen auf.
+        Wenn uns kalt wird, wärmen wir uns bei Kakao wieder auf und lernen etwas
+        Theoretisches über Pferde. An sehr heißen Tagen spritzen wir die Pferde
+        mit dem Wasserschlauch nass und waschen sie. Damit uns nicht zu heiß
+        wird, gibt es auch einmal ein Eis.
+      </p>
+      <p><strong>Viele Grüße und bis bald!</strong></p>
+    `,
+  },
+  kinderreitkurs: {
+    title: "Kinderreitkurs",
+    time: "16:30 bis 18:00 Uhr",
+    price: "Preis auf Anfrage",
+    content: `
+      <h4>Info Kinderreitkurs</h4>
+      <p>
+        Sie bringen Ihr Kind um 16:30 Uhr zu mir in die Marienstraße 17,
+        49479 Ibbenbüren. Sie dürfen Ihr Kind nach der Begrüßungsrunde bei mir
+        lassen und um 18:00 Uhr wieder abholen. Am ersten Tag tragen Sie noch
+        Ihre Erreichbarkeit während der Kurszeit in die Telefonliste ein oder
+        kontrollieren die vorhandene Telefonnummer.
+      </p>
+      <p>
+        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
+        mitgebracht werden. Falls der Helm vergessen wird, stelle ich für
+        5 EUR einen Leihhelm zur Verfügung. Bei warmem Wetter bitte keine kurze
+        Kleidung wie kurze Hosen oder Röcke, am besten eine eng sitzende Hose.
+        Bitte nur feste, geschlossene Schuhe und keine Sandalen.
+      </p>
+      <h4>Inhalt</h4>
+      <p>
+        Wir werden in jeder Gruppenstunde per Würfel oder Los die
+        Reiter-Reihenfolge bestimmen. Danach wird gemeinsam geputzt. Jedes Kind
+        darf sich eine Bürste oder einen Striegel aussuchen. Wenn das Pferd
+        geputzt ist, gehen wir auf den Reitplatz.
+      </p>
+      <p>
+        Wir spielen gemeinsam ein Aufwärmspiel. Ein Kind ist dabei der Reiter,
+        die anderen befinden sich im Kreis um das Pferd herum. In den ersten
+        Stunden üben wir einige Grundregeln. Die Kinder sollen Spaß haben und
+        können Wünsche äußern, was sie gerne auf oder mit einem Pferd machen
+        möchten. Jede Stunde ist individuell.
+      </p>
+      <p>
+        Bei schlechtem Wetter halten wir uns auch einmal im Reiterstübchen auf
+        und lernen etwas Theoretisches über Pferde. An sehr heißen Tagen
+        spritzen wir die Pferde mit dem Wasserschlauch nass und waschen sie.
+        Getränke sollten mitgebracht werden.
+      </p>
+      <p><strong>Ich freue mich, Euch kennenzulernen!</strong></p>
+    `,
+  },
+  erlebnisreitkurs: {
+    title: "Erlebnisreitkurs",
+    time: "Samstag, 10:00 bis 14:00 Uhr",
+    price: "55 EURO",
+    content: `
+      <h4>Info zum Kursinhalt</h4>
+      <p>
+        Sie bringen Ihre Kinder um 10:00 Uhr zu mir und dürfen Ihr Kind nach
+        einer kurzen Begrüßungsrunde bei mir lassen.
+      </p>
+      <p>
+        Bitte wetterfeste Kleidung anziehen. Ein Fahrrad- oder Reithelm muss
+        mitgebracht werden. Bei warmem Wetter bitte keine kurze Kleidung wie
+        kurze Hosen oder Röcke, am besten eine Leggings. Bitte nur feste,
+        geschlossene Schuhe und keine Sandalen.
+      </p>
+      <p>
+        Die Kinder bekommen in unseren gemeinsamen Pausen Wasser und
+        Apfelschorle angeboten. Gegen 12:30 Uhr werden wir Mittag essen:
+        Pommes und Hähnchen-Dinos mit Tomatenketchup und Mayonnaise. Kleine
+        Leckereien stehen natürlich auch bereit!
+      </p>
+      <h4>Ablauf</h4>
+      <ul class="offer-schedule">
+        <li><strong>10:15 Uhr:</strong> Goldene Regeln besprechen – Verhalten im Umgang mit den Pferden</li>
+        <li><strong>10:30 Uhr:</strong> Begrüßung der Pferde Balu und Nele, anschließend Pferdepflege</li>
+        <li><strong>11:00 Uhr:</strong> Reitplatz, Auslosung der Reihenfolge und Gruppenspiele auf dem Pferd</li>
+        <li><strong>12:15 Uhr:</strong> Pferde zurück in den Stall bringen</li>
+        <li><strong>12:30 Uhr:</strong> Mittagessen</li>
+        <li><strong>13:00 Uhr:</strong> Kreatives Angebot und Schatzsuche</li>
+        <li><strong>14:00 Uhr:</strong> Abholzeit und Urkundenvergabe</li>
+      </ul>
+    `,
+  },
+};
+
+const formatter = new Intl.DateTimeFormat("de-DE", { month: "long", year: "numeric" });
+const dateFormatter = new Intl.DateTimeFormat("de-DE", {
+  weekday: "long",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
+const baseSlots = ["09:00", "10:30", "14:00", "16:30"];
+const fixedBusy = new Set([
+  "2026-06-04|16:30",
+  "2026-06-06|10:30",
+  "2026-06-11|16:30",
+  "2026-06-13|10:30",
+  "2026-06-18|16:30",
+  "2026-06-20|14:00",
+  "2026-07-12|10:30",
+  "2026-09-13|10:30",
+]);
+
+const storedBusy = new Set(JSON.parse(localStorage.getItem("pferdeerlebnis-busy") || "[]"));
+let cursor = new Date(2026, 5, 1);
+let selectedDate = null;
+let selectedSlot = null;
+
+function renderOffer(offerId) {
+  const offer = offers[offerId];
+  if (!offer) return;
+  offerTabs.forEach((tab) => {
+    const active = tab.dataset.offer === offerId;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+  offerDetail.innerHTML = `
+    <h3>${offer.title}</h3>
+    <div class="offer-content">${offer.content || `<p>${offer.description}</p>`}</div>
+    <div class="offer-meta">
+      <span>${offer.time}</span>
+    </div>
+    <strong class="offer-price">${offer.price}</strong>
+  `;
+}
+
+offerTabs.forEach((tab) => {
+  tab.setAttribute("aria-pressed", "false");
+  tab.addEventListener("click", () => renderOffer(tab.dataset.offer));
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", link.getAttribute("href"));
+  });
+});
+
+function closeLightbox() {
+  photoLightbox.classList.remove("open");
+  photoLightbox.setAttribute("aria-hidden", "true");
+  photoLightboxImage.removeAttribute("src");
+  document.body.classList.remove("lightbox-active");
+}
+
+photoThumbs.forEach((thumb) => {
+  thumb.addEventListener("click", () => {
+    const image = thumb.querySelector("img");
+    photoLightboxImage.src = thumb.dataset.full;
+    photoLightboxImage.alt = image?.alt || "Vergrößertes Pferdeerlebnis Foto";
+    photoLightbox.classList.add("open");
+    photoLightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-active");
+    photoLightboxClose.focus();
+  });
+});
+
+photoLightboxClose.addEventListener("click", closeLightbox);
+photoLightbox.addEventListener("click", (event) => {
+  if (event.target === photoLightbox) closeLightbox();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && photoLightbox.classList.contains("open")) {
+    closeLightbox();
+  }
+});
+
+function isoDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function slotsForDate(date) {
+  const day = date.getDay();
+  if (day === 0) return [];
+  if (day === 4) return ["16:30", "17:15"];
+  if (day === 5) return ["09:00", "10:30"];
+  if (day === 6) return ["10:00", "12:00"];
+  return baseSlots;
+}
+
+function isBusy(dateKey, slot) {
+  const key = `${dateKey}|${slot}`;
+  return fixedBusy.has(key) || storedBusy.has(key);
+}
+
+function hasFreeSlot(date) {
+  const dateKey = isoDate(date);
+  return slotsForDate(date).some((slot) => !isBusy(dateKey, slot));
+}
+
+function renderCalendar() {
+  monthLabel.textContent = formatter.format(cursor);
+  calendarGrid.innerHTML = "";
+
+  const first = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
+  const gridStart = new Date(first);
+  const mondayOffset = (first.getDay() + 6) % 7;
+  gridStart.setDate(first.getDate() - mondayOffset);
+
+  for (let i = 0; i < 42; i += 1) {
+    const day = new Date(gridStart);
+    day.setDate(gridStart.getDate() + i);
+    const dateKey = isoDate(day);
+    const isCurrentMonth = day.getMonth() === cursor.getMonth();
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "day-button";
+    button.textContent = day.getDate();
+    button.dataset.date = dateKey;
+    button.setAttribute("aria-label", dateFormatter.format(day));
+
+    if (!isCurrentMonth) button.classList.add("outside");
+    if (slotsForDate(day).length === 0) button.classList.add("busy");
+    if (hasFreeSlot(day)) button.classList.add("has-free");
+    if (selectedDate === dateKey) button.classList.add("selected");
+
+    button.addEventListener("click", () => {
+      selectedDate = dateKey;
+      selectedSlot = null;
+      renderCalendar();
+      renderSlots(day);
+      updateFormNote();
+    });
+
+    calendarGrid.append(button);
+  }
+}
+
+function renderSlots(date) {
+  const dateKey = isoDate(date);
+  selectedDateLabel.textContent = dateFormatter.format(date);
+  slotList.innerHTML = "";
+
+  const slots = slotsForDate(date);
+  if (slots.length === 0) {
+    slotList.textContent = "An diesem Tag sind keine Termine vorgesehen.";
+    return;
+  }
+
+  slots.forEach((slot) => {
+    const busy = isBusy(dateKey, slot);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "slot-button";
+    button.textContent = busy ? `${slot} belegt` : slot;
+    button.disabled = busy;
+    if (selectedSlot === slot) button.classList.add("selected");
+    button.addEventListener("click", () => {
+      selectedSlot = slot;
+      renderSlots(date);
+      updateFormNote();
+    });
+    slotList.append(button);
+  });
+}
+
+function updateFormNote(message) {
+  if (message) {
+    formNote.textContent = message;
+    return;
+  }
+  if (!selectedDate || !selectedSlot) {
+    formNote.textContent = "Wählen Sie zuerst einen freien Termin.";
+    return;
+  }
+  formNote.textContent = `Ausgewählt: ${selectedDate} um ${selectedSlot} Uhr.`;
+}
+
+prevMonth.addEventListener("click", () => {
+  cursor = new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1);
+  renderCalendar();
+});
+
+nextMonth.addEventListener("click", () => {
+  cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+  renderCalendar();
+});
+
+bookingForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!selectedDate || !selectedSlot) {
+    updateFormNote("Bitte wählen Sie einen freien Termin im Kalender.");
+    return;
+  }
+
+  const key = `${selectedDate}|${selectedSlot}`;
+  storedBusy.add(key);
+  localStorage.setItem("pferdeerlebnis-busy", JSON.stringify([...storedBusy]));
+  bookingForm.reset();
+  updateFormNote("Danke, die Terminanfrage wurde im Prototyp gespeichert und der Slot ist nun belegt.");
+  selectedSlot = null;
+  renderCalendar();
+  renderSlots(new Date(`${selectedDate}T12:00:00`));
+});
+
+renderCalendar();
+const todayChoice = new Date(2026, 5, 4);
+selectedDate = isoDate(todayChoice);
+renderCalendar();
+renderSlots(todayChoice);
+updateFormNote();
