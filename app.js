@@ -31,6 +31,10 @@ const offers = {
         <li><strong>Selbstwirksamkeit:</strong> Das Führen und Reiten eines so großen Tieres vermittelt dem Klienten ein Gefühl von Stärke und Kontrolle, das direkt in den Alltag übertragen werden kann.</li>
         <li><strong>Sensorik:</strong> Der Kontakt zum Tier mit Wärme, Geruch und taktilen Reizen wirkt beruhigend und ist ideal für die sensorische Integration bei Entwicklungsverzögerungen oder psychischen Belastungen.</li>
       </ul>
+      <p class="offer-highlight">
+        Reittherapie ist keine Krankenkassenleistung. Es gibt jedoch die
+        Möglichkeit, die Reittherapiekosten erstattet zu bekommen.
+      </p>
     `,
   },
   kinderreitgruppe: {
