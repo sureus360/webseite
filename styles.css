@@ -532,6 +532,39 @@ section h2,
   margin-top: 22px;
 }
 
+.gallery {
+  background: var(--mist);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(10px, 1.8vw, 18px);
+}
+
+.gallery-item {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(82, 121, 106, 0.18);
+  background: var(--white);
+  box-shadow: 0 12px 30px rgba(41, 73, 63, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: none;
+  transition: transform 180ms ease;
+}
+
+.gallery-item:hover img,
+.gallery-item:focus-visible img {
+  transform: scale(1.04);
+}
+
 .booking-shell {
   display: grid;
   grid-template-columns: minmax(260px, 0.68fr) minmax(320px, 1fr);

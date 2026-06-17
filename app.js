@@ -246,10 +246,14 @@ const dateFormatter = new Intl.DateTimeFormat("de-DE", {
   year: "numeric",
 });
 
-const storedBusy = new Set(JSON.parse(localStorage.getItem("pferdeerlebnis-busy") || "[]"));
+const API_ENDPOINT = "api/bookings.php";
+const bookedSlots = new Set();
+const fixedBusyWeekdays = new Set([3, 4]);
 let cursor = new Date(2026, 5, 1);
 let selectedDate = null;
 let selectedSlot = null;
+let apiReady = false;
+let isSubmitting = false;
 
 function renderOffer(offerId) {
   const offer = offers[offerId];
@@ -321,6 +325,62 @@ function isoDate(date) {
   return `${year}-${month}-${day}`;
 }
 
+function monthRange(date) {
+  const first = new Date(date.getFullYear(), date.getMonth(), 1);
+  const gridStart = new Date(first);
+  const mondayOffset = (first.getDay() + 6) % 7;
+  gridStart.setDate(first.getDate() - mondayOffset);
+
+  const gridEnd = new Date(gridStart);
+  gridEnd.setDate(gridStart.getDate() + 41);
+
+  return {
+    from: isoDate(gridStart),
+    to: isoDate(gridEnd),
+  };
+}
+
+async function apiRequest(action, options = {}) {
+  const response = await fetch(`${API_ENDPOINT}?action=${action}`, {
+    headers: {
+      Accept: "application/json",
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+    },
+    ...options,
+  });
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || "Die Anfrage konnte nicht verarbeitet werden.");
+  }
+
+  return data;
+}
+
+async function loadBookings() {
+  const { from, to } = monthRange(cursor);
+
+  try {
+    const data = await apiRequest(`list&from=${from}&to=${to}`);
+    if (!Array.isArray(data.bookings)) {
+      throw new Error("Die Kalender-API ist noch nicht aktiv.");
+    }
+    bookedSlots.clear();
+    data.bookings.forEach((booking) => {
+      bookedSlots.add(`${booking.booking_date}|${booking.slot}`);
+    });
+    apiReady = true;
+  } catch (error) {
+    apiReady = false;
+    updateFormNote("Kalenderdaten konnten noch nicht geladen werden. Nach der Datenbank-Einrichtung funktioniert die Buchung zentral.");
+  }
+
+  renderCalendar();
+  if (selectedDate) {
+    renderSlots(new Date(`${selectedDate}T12:00:00`));
+  }
+}
+
 function slotsForDate(date) {
   const day = date.getDay();
   if (day === 1) return ["16:30"];
@@ -334,7 +394,7 @@ function slotsForDate(date) {
 function isBusy(date, slot) {
   const key = `${isoDate(date)}|${slot}`;
   const day = date.getDay();
-  return day === 3 || day === 4 || storedBusy.has(key);
+  return fixedBusyWeekdays.has(day) || bookedSlots.has(key);
 }
 
 function hasFreeSlot(date) {
@@ -412,6 +472,10 @@ function updateFormNote(message) {
     formNote.textContent = message;
     return;
   }
+  if (!apiReady) {
+    formNote.textContent = "Kalenderdaten werden geladen oder die Datenbank ist noch nicht eingerichtet.";
+    return;
+  }
   if (!selectedDate || !selectedSlot) {
     formNote.textContent = "Wählen Sie zuerst einen freien Termin.";
     return;
@@ -421,29 +485,60 @@ function updateFormNote(message) {
 
 prevMonth.addEventListener("click", () => {
   cursor = new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1);
-  renderCalendar();
+  loadBookings();
 });
 
 nextMonth.addEventListener("click", () => {
   cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
-  renderCalendar();
+  loadBookings();
 });
 
-bookingForm.addEventListener("submit", (event) => {
+bookingForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!selectedDate || !selectedSlot) {
     updateFormNote("Bitte wählen Sie einen freien Termin im Kalender.");
     return;
   }
+  if (!apiReady) {
+    updateFormNote("Die Datenbankverbindung ist noch nicht bereit. Bitte versuchen Sie es später erneut.");
+    return;
+  }
+  if (isSubmitting) return;
 
-  const key = `${selectedDate}|${selectedSlot}`;
-  storedBusy.add(key);
-  localStorage.setItem("pferdeerlebnis-busy", JSON.stringify([...storedBusy]));
-  bookingForm.reset();
-  updateFormNote("Danke, die Terminanfrage wurde im Prototyp gespeichert und der Slot ist nun belegt.");
-  selectedSlot = null;
-  renderCalendar();
-  renderSlots(new Date(`${selectedDate}T12:00:00`));
+  isSubmitting = true;
+  updateFormNote("Ihre Terminanfrage wird gespeichert ...");
+
+  const submitButton = bookingForm.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+
+  try {
+    const payload = {
+      date: selectedDate,
+      slot: selectedSlot,
+      service: document.querySelector("#serviceSelect").value,
+      name: document.querySelector("#nameInput").value,
+      contact: document.querySelector("#contactInput").value,
+      message: document.querySelector("#messageInput").value,
+    };
+
+    await apiRequest("create", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+
+    bookedSlots.add(`${selectedDate}|${selectedSlot}`);
+    bookingForm.reset();
+    updateFormNote("Danke, Ihre Terminanfrage wurde gespeichert. Ich melde mich zur Bestätigung.");
+    selectedSlot = null;
+    renderCalendar();
+    renderSlots(new Date(`${selectedDate}T12:00:00`));
+  } catch (error) {
+    updateFormNote(error.message);
+    await loadBookings();
+  } finally {
+    isSubmitting = false;
+    submitButton.disabled = false;
+  }
 });
 
 renderCalendar();
@@ -451,4 +546,4 @@ const todayChoice = new Date(2026, 5, 4);
 selectedDate = isoDate(todayChoice);
 renderCalendar();
 renderSlots(todayChoice);
-updateFormNote();
+loadBookings();
