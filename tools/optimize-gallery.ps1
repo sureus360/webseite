@@ -4,7 +4,8 @@ param(
   [string]$ThumbTarget = "assets/gallery/thumbs",
   [int]$LargeWidth = 1600,
   [int]$ThumbWidth = 480,
-  [long]$Quality = 82
+  [long]$Quality = 82,
+  [switch]$Append
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -54,6 +55,21 @@ New-Item -ItemType Directory -Force -Path $LargeTarget, $ThumbTarget | Out-Null
 
 $photos = Get-ChildItem -Path $Source -File -Include *.jpg, *.jpeg -Recurse | Sort-Object Name
 $index = 1
+
+if ($Append) {
+  $existing = Get-ChildItem -Path $LargeTarget -File -Filter "gallery-*.jpg" |
+    ForEach-Object {
+      if ($_.BaseName -match '^gallery-(\d+)$') {
+        [int]$Matches[1]
+      }
+    } |
+    Sort-Object -Descending |
+    Select-Object -First 1
+
+  if ($existing) {
+    $index = $existing + 1
+  }
+}
 
 foreach ($photo in $photos) {
   $name = "gallery-{0:D2}.jpg" -f $index

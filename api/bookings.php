@@ -10,6 +10,7 @@ const ALLOWED_SERVICES = [
     'Kinderreitgruppe',
     'Kinderreitkurs',
     'Erlebnisreitkurs',
+    'Resonanz mit der Natur / Klangerlebnis',
 ];
 
 function json_response(array $payload, int $status = 200): void

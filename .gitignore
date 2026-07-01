@@ -1,4 +1,7 @@
 api/config.php
+api/config.php.php
 assets/Pictures/
+assets/Bilder Internetseite/
 source_assets/
+output/
 *.pdf

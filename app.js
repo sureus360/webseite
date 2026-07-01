@@ -17,7 +17,7 @@ const offers = {
   reittherapie: {
     title: "Reittherapie",
     time: "30 oder 60 Min.",
-    price: "30 EUR / 55 EUR",
+    price: "Preisliste: 2x 60 Min. monatlich: 110 € · 4x 30 Min. monatlich: 120 € · Reittherapie ist auch wöchentlich möglich · Mind. 2 Buchungen für Vertragsabschluss nötig",
     content: `
       <h4>Warum Reittherapie? – Der ganzheitliche Ansatz</h4>
       <p>
@@ -49,6 +49,10 @@ const offers = {
         Zeit mit den Pferden zu verbringen. Damit Sie bestmöglich informiert
         sind, habe ich die wichtigsten Details hier für Sie zusammengefasst:
       </p>
+      <p class="offer-highlight">
+        Aktuell ist die Kinderreitgruppe voll. Neue Anfragen nehme ich gerne
+        für die Warteliste auf.
+      </p>
 
       <h4>Ablauf und Inhalte</h4>
       <p>
@@ -77,13 +81,8 @@ const offers = {
       <h4>Organisatorisches und Zahlung</h4>
       <p><strong>Monatlicher Beitrag:</strong> 57,00 €.</p>
       <p>
-        <strong>Zahlungshinweise:</strong> Bitte überweisen Sie den Betrag
-        jeweils zum Monatsanfang auf folgendes Konto:
-      </p>
-      <p class="offer-highlight">
-        <strong>Kontoinhaber:</strong> Sabrina Riese<br />
-        <strong>IBAN:</strong> DE77 4036 1906 4320 4425 00<br />
-        <strong>Institut:</strong> Volksbank Münsterland Nord
+        <strong>Zahlungshinweise:</strong> Die Zahlungsinformationen erhalten
+        Sie nach bestätigter Buchung per E-Mail.
       </p>
       <p>
         <strong>Verwendungszweck:</strong> Bitte geben Sie den Namen des Kindes
@@ -115,13 +114,8 @@ const offers = {
 
       <h4>Anmeldung &amp; Bezahlung</h4>
       <p>
-        Die Kursgebühr beträgt 90,00 €. Bitte überweisen Sie diesen Betrag vor
-        Kursbeginn auf das angegebene Konto:
-      </p>
-      <p class="offer-highlight">
-        <strong>Sabrina Riese</strong><br />
-        DE77 4036 1906 4320 4425 00<br />
-        Volksbank Münsterland Nord
+        Die Kursgebühr beträgt 90,00 €. Die Zahlungsinformationen erhalten Sie
+        nach bestätigter Buchung per E-Mail.
       </p>
       <p>
         <strong>Verwendungszweck:</strong> Bitte geben Sie unbedingt den Namen
@@ -183,14 +177,8 @@ const offers = {
 
       <h4>Kosten &amp; Zahlung</h4>
       <p>
-        Die Teilnahmegebühr für diesen Tag beträgt 55,00 €. Bitte überweisen
-        Sie den Betrag unter Angabe des Namens Ihres Kindes sowie des Kursnamens
-        auf folgendes Konto:
-      </p>
-      <p class="offer-highlight">
-        <strong>Kontoinhaberin:</strong> Sabrina Riese<br />
-        <strong>IBAN:</strong> DE77 4036 1906 4320 4425 00<br />
-        <strong>Bank:</strong> Volksbank Münsterland Nord
+        Die Teilnahmegebühr für diesen Tag beträgt 55,00 €. Die
+        Zahlungsinformationen erhalten Sie nach bestätigter Buchung per E-Mail.
       </p>
 
       <h4>Das erwartet Ihr Kind – Unsere Highlights</h4>
@@ -236,6 +224,30 @@ const offers = {
       <p>Viele Grüße<br /><strong>Sabrina Riese</strong></p>
     `,
   },
+  resonanznatur: {
+    title: "Resonanz mit der Natur / Klangerlebnis",
+    time: "Zeit nach Absprache",
+    price: "30 Minuten: 45 €",
+    content: `
+      <h4>Ruhe finden, Natur erleben und Klang spüren</h4>
+      <p>
+        Dieses Angebot lädt dazu ein, bewusst zur Ruhe zu kommen und die Natur
+        mit allen Sinnen wahrzunehmen. Sanfte Klänge, achtsame Wahrnehmungsübungen
+        und die ruhige Umgebung mit den Pferden schaffen einen geschützten Rahmen,
+        in dem Entspannung, innere Balance und neue Kraft entstehen dürfen.
+      </p>
+      <ul class="offer-facts">
+        <li><strong>Naturerfahrung:</strong> Die Umgebung, die Tiere und der Moment stehen im Mittelpunkt. Das Angebot unterstützt dabei, den Alltag loszulassen und wieder mehr bei sich selbst anzukommen.</li>
+        <li><strong>Klangerlebnis:</strong> Wohltuende Klänge können beruhigend wirken, die Körperwahrnehmung fördern und einen sanften Zugang zu Entspannung ermöglichen.</li>
+        <li><strong>Kosten:</strong> 30 Minuten kosten 45 €.</li>
+        <li><strong>Gemeinsam erleben:</strong> Gerne auch mit Partner, Freundin oder in einer Kleingruppe möglich.</li>
+        <li><strong>Individuelle Begleitung:</strong> Weitere Fragen sowie Dauer, Ablauf und Intensität werden persönlich und individuell besprochen.</li>
+      </ul>
+      <p class="offer-highlight">
+        Dieses Angebot ist ab dem 01.08.2027 buchbar.
+      </p>
+    `,
+  },
 };
 
 const formatter = new Intl.DateTimeFormat("de-DE", { month: "long", year: "numeric" });
@@ -248,8 +260,117 @@ const dateFormatter = new Intl.DateTimeFormat("de-DE", {
 
 const API_ENDPOINT = "api/bookings.php";
 const bookedSlots = new Set();
-const fixedBusyWeekdays = new Set([3, 4]);
-let cursor = new Date(2026, 5, 1);
+const fixedBookedSlots = new Set([
+  "2026-06-29|16:30-18:00 Kinderreitkurs",
+  "2026-06-30|16:30",
+  "2026-07-01|16:30",
+  "2026-07-01|17:00",
+  "2026-07-02|16:30-18:00 Kinderreitkurs",
+  "2026-07-03|17:30",
+  "2026-07-06|16:30-18:00 Kinderreitkurs",
+  "2026-07-08|16:30",
+  "2026-07-08|17:00",
+  "2026-07-09|16:30-18:00 Kinderreitkurs",
+  "2026-07-13|16:30-18:00 Kinderreitkurs",
+  "2026-07-14|16:30",
+  "2026-07-15|16:30",
+  "2026-07-15|17:00",
+  "2026-07-16|16:30-18:00 Kinderreitkurs",
+  "2026-07-21|11:00",
+  "2026-07-24|15:30",
+  "2026-07-24|16:30",
+  "2026-07-24|17:30",
+  "2026-07-31|15:30",
+  "2026-07-31|16:30",
+  "2026-07-31|17:30",
+]);
+const fixedBusyWeekdays = new Set([0, 6]);
+const kinderreitgruppeBookedYears = new Set(["2027"]);
+const kinderreitgruppeBookedMonths = new Set(["2026-09", "2026-10", "2026-11", "2026-12"]);
+const kinderreitgruppePauseRanges = [
+  ["2026-07-20", "2026-09-01"],
+  ["2026-10-17", "2026-10-31"],
+  ["2026-12-23", "2027-01-06"],
+];
+const vacationRanges = [
+  ["2026-08-10", "2026-09-01"],
+];
+const publicHolidays = new Set([
+  "2026-01-01",
+  "2026-04-03",
+  "2026-04-06",
+  "2026-05-01",
+  "2026-05-14",
+  "2026-05-25",
+  "2026-06-04",
+  "2026-10-03",
+  "2026-11-01",
+  "2026-12-25",
+  "2026-12-26",
+]);
+const specialSlots = {
+  "2026-06-29": ["16:30-18:00 Kinderreitkurs"],
+  "2026-06-30": ["16:30", "17:30"],
+  "2026-07-02": ["16:30-18:00 Kinderreitkurs"],
+  "2026-07-06": ["16:30-18:00 Kinderreitkurs"],
+  "2026-07-07": [],
+  "2026-07-10": [],
+  "2026-07-13": ["16:30-18:00 Kinderreitkurs"],
+  "2026-07-14": ["16:30", "17:30"],
+  "2026-07-09": ["16:30-18:00 Kinderreitkurs"],
+  "2026-07-16": ["16:30-18:00 Kinderreitkurs"],
+  "2026-07-17": ["15:30", "16:30", "17:30"],
+  "2026-07-18": [
+    "10:00-14:00 Erlebnisreitkurs Platz 1",
+    "10:00-14:00 Erlebnisreitkurs Platz 2",
+    "10:00-14:00 Erlebnisreitkurs Platz 3",
+    "10:00-14:00 Erlebnisreitkurs Platz 4",
+    "10:00-14:00 Erlebnisreitkurs Platz 5",
+    "10:00-14:00 Erlebnisreitkurs Platz 6",
+  ],
+  "2026-07-20": ["15:00", "16:00", "17:00"],
+  "2026-07-21": ["10:00", "11:00", "12:00"],
+  "2026-07-22": ["10:00", "11:00"],
+  "2026-07-27": ["15:00", "16:00", "17:00"],
+  "2026-07-28": ["10:00", "11:00", "12:00"],
+  "2026-07-29": [],
+  "2026-08-03": ["15:00", "16:00", "17:00"],
+  "2026-08-04": ["10:00", "11:00", "12:00"],
+  "2026-08-05": ["10:00", "11:00"],
+  "2026-08-07": [],
+  "2026-08-14": [],
+  "2026-08-21": [],
+  "2026-08-28": [],
+  "2026-10-19": ["15:00", "16:00", "17:00"],
+  "2026-10-20": ["10:00", "11:00"],
+  "2026-10-21": [],
+  "2026-10-22": [],
+  "2026-10-23": [],
+  "2026-10-26": [],
+  "2026-10-27": [],
+  "2026-10-28": [],
+  "2026-10-29": [],
+  "2026-10-30": [],
+  "2026-11-06": ["15:30", "16:30"],
+  "2026-11-13": ["15:30", "16:30"],
+  "2026-11-20": [],
+  "2026-11-27": ["15:30", "16:30"],
+  "2026-12-04": ["15:30", "16:30"],
+  "2026-12-11": ["15:30", "16:30"],
+  "2026-12-18": ["15:30", "16:30"],
+  "2026-12-23": [],
+  "2026-12-24": [],
+  "2026-12-25": [],
+  "2026-12-28": [],
+  "2026-12-29": [],
+  "2026-12-30": [],
+  "2026-12-31": [],
+  "2027-01-01": [],
+  "2027-01-04": [],
+  "2027-01-05": [],
+  "2027-01-06": [],
+};
+let cursor = new Date(2026, 6, 1);
 let selectedDate = null;
 let selectedSlot = null;
 let apiReady = false;
@@ -327,16 +448,11 @@ function isoDate(date) {
 
 function monthRange(date) {
   const first = new Date(date.getFullYear(), date.getMonth(), 1);
-  const gridStart = new Date(first);
-  const mondayOffset = (first.getDay() + 6) % 7;
-  gridStart.setDate(first.getDate() - mondayOffset);
-
-  const gridEnd = new Date(gridStart);
-  gridEnd.setDate(gridStart.getDate() + 41);
+  const last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
   return {
-    from: isoDate(gridStart),
-    to: isoDate(gridEnd),
+    from: isoDate(first),
+    to: isoDate(last),
   };
 }
 
@@ -382,50 +498,110 @@ async function loadBookings() {
 }
 
 function slotsForDate(date) {
+  const dateKey = isoDate(date);
+  if (Object.prototype.hasOwnProperty.call(specialSlots, dateKey)) return specialSlots[dateKey];
+  if (isVacationDate(dateKey)) return [];
+
   const day = date.getDay();
   if (day === 1) return ["16:30"];
   if (day === 2) return ["16:30", "17:30"];
   if (day === 3) return ["16:30", "17:00"];
-  if (day === 4) return ["16:30–18:00 Kinderreitgruppe"];
+  if (day === 4 && isKinderreitgruppePaused(dateKey)) return [];
+  if (day === 4 && dateKey.startsWith("2027-")) return ["16:30-18:00 Kinderreitkurs"];
+  if (day === 4) return ["16:30-18:00 Kinderreitgruppe"];
   if (day === 5) return ["15:30", "16:30", "17:30"];
   return [];
 }
 
+function isKinderreitgruppePaused(dateKey) {
+  return (
+    publicHolidays.has(dateKey) ||
+    kinderreitgruppePauseRanges.some(([from, to]) => dateKey >= from && dateKey <= to)
+  );
+}
+
+function isVacationDate(dateKey) {
+  return vacationRanges.some(([from, to]) => dateKey >= from && dateKey <= to);
+}
+
 function isBusy(date, slot) {
-  const key = `${isoDate(date)}|${slot}`;
+  const dateKey = isoDate(date);
+  const key = `${dateKey}|${slot}`;
   const day = date.getDay();
-  return fixedBusyWeekdays.has(day) || bookedSlots.has(key);
+  return (
+    ((kinderreitgruppeBookedYears.has(dateKey.slice(0, 4)) ||
+      kinderreitgruppeBookedMonths.has(dateKey.slice(0, 7))) &&
+      day === 4 &&
+      (slot.includes("Kinderreitgruppe") || slot.includes("Kinderreitkurs"))) ||
+    (!specialSlots[dateKey] && fixedBusyWeekdays.has(day)) ||
+    fixedBookedSlots.has(key) ||
+    bookedSlots.has(key)
+  );
 }
 
 function hasFreeSlot(date) {
   return slotsForDate(date).some((slot) => !isBusy(date, slot));
 }
 
+function calendarSlotLabel(slot) {
+  const match = slot.match(/^(\d{1,2}:\d{2})(?:-(\d{1,2}:\d{2}))?/);
+  if (!match) return slot;
+  return match[2] ? `${match[1]}-${match[2]}` : match[1];
+}
+
 function renderCalendar() {
   monthLabel.textContent = formatter.format(cursor);
   calendarGrid.innerHTML = "";
 
+  const daysInMonth = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0).getDate();
   const first = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
-  const gridStart = new Date(first);
   const mondayOffset = (first.getDay() + 6) % 7;
-  gridStart.setDate(first.getDate() - mondayOffset);
 
-  for (let i = 0; i < 42; i += 1) {
-    const day = new Date(gridStart);
-    day.setDate(gridStart.getDate() + i);
+  for (let i = 0; i < mondayOffset; i += 1) {
+    const spacer = document.createElement("span");
+    spacer.className = "calendar-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    calendarGrid.append(spacer);
+  }
+
+  for (let dayNumber = 1; dayNumber <= daysInMonth; dayNumber += 1) {
+    const day = new Date(cursor.getFullYear(), cursor.getMonth(), dayNumber);
     const dateKey = isoDate(day);
-    const isCurrentMonth = day.getMonth() === cursor.getMonth();
     const button = document.createElement("button");
     button.type = "button";
     button.className = "day-button";
-    button.textContent = day.getDate();
     button.dataset.date = dateKey;
     button.setAttribute("aria-label", dateFormatter.format(day));
 
-    if (!isCurrentMonth) button.classList.add("outside");
-    if (slotsForDate(day).length === 0) button.classList.add("busy");
-    if (hasFreeSlot(day)) button.classList.add("has-free");
+    const slots = slotsForDate(day);
+    const hasSlots = slots.length > 0;
+    const hasFree = hasFreeSlot(day);
+    const freeSlots = slots.filter((slot) => !isBusy(day, slot));
+    const freeTimes = [...new Set(freeSlots.map(calendarSlotLabel))];
+
+    const dayNumberElement = document.createElement("span");
+    dayNumberElement.className = "day-number";
+    dayNumberElement.textContent = day.getDate();
+    button.append(dayNumberElement);
+
+    if (freeTimes.length > 0) {
+      const timeList = document.createElement("span");
+      timeList.className = "day-times";
+      const visibleTimes = freeTimes.slice(0, 3);
+      timeList.textContent =
+        freeTimes.length > 3 ? `${visibleTimes.join(" ")} +` : visibleTimes.join(" ");
+      button.append(timeList);
+    }
+
+    const isFixedBusyDay =
+      fixedBusyWeekdays.has(day.getDay()) &&
+      !Object.prototype.hasOwnProperty.call(specialSlots, dateKey);
+
+    if (!hasSlots || isFixedBusyDay || !hasFree) button.classList.add("busy");
+    if (isFixedBusyDay) button.classList.add("weekend-busy");
+    if (hasFree) button.classList.add("has-free");
     if (selectedDate === dateKey) button.classList.add("selected");
+    if (!hasSlots || isFixedBusyDay || !hasFree) button.disabled = true;
 
     button.addEventListener("click", () => {
       selectedDate = dateKey;
@@ -460,6 +636,12 @@ function renderSlots(date) {
     if (selectedSlot === slot) button.classList.add("selected");
     button.addEventListener("click", () => {
       selectedSlot = slot;
+      if (slot.includes("Erlebnisreitkurs")) {
+        document.querySelector("#serviceSelect").value = "Erlebnisreitkurs";
+      }
+      if (slot.includes("Kinderreitkurs")) {
+        document.querySelector("#serviceSelect").value = "Kinderreitkurs";
+      }
       renderSlots(date);
       updateFormNote();
     });
@@ -542,7 +724,7 @@ bookingForm.addEventListener("submit", async (event) => {
 });
 
 renderCalendar();
-const todayChoice = new Date(2026, 5, 4);
+const todayChoice = new Date(2026, 6, 1);
 selectedDate = isoDate(todayChoice);
 renderCalendar();
 renderSlots(todayChoice);

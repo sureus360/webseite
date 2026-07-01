@@ -11,7 +11,7 @@ return [
         'charset' => 'utf8mb4',
     ],
     'mail' => [
-        'to' => 'pferdeeerlebnis.riese@gmail.com',
+        'to' => 'pferdeerlebnis.riese@gmail.com',
         'from' => 'noreply@DEINE-DOMAIN.de',
     ],
 ];
